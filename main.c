@@ -1,6 +1,10 @@
 #include <stdio.h>
+#include "agenda.h"
 
 int main(){
+    func funcoes[] = {criar, deletar, listar, salvar, carregar}; // Lista de Funções
+
+    Contato contatos[TOTAL];
 
     int pos;
     int opcao;
@@ -18,14 +22,16 @@ int main(){
         scanf("%d", &opcao);
 
         opcao--;
-        if(opcao > 4)
-            printf("| > Opcao inválida...\n");
-        else if(opcao >= 0){
-            // Tratamento de Chamado de Funções
+        if(opcao <= 4 && opcao >= 0 ){
+            Value res = funcoes[opcao](contatos, &pos); // Chama a Função Respectiva a opção escolhida
         }
-        else
+        else if(opcao == -1){
             printf("| > Sair...\n");
-
-    } while(opcao >= 0);
+        }
+        else{
+            printf("| > Opcao inválida, Tente Novamente...\n");
+        }
+            
+    } while(opcao != -1);
 
 }
