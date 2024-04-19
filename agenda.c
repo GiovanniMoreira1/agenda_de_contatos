@@ -58,8 +58,28 @@ Value criar(Contato contatos[], int *pos){
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
-Value deletar(Contato tarefas[], int *pos){
-    printf("Deletar Contato...");
+Value deletar(Contato contatos[], int *pos){
+    char tel_deletar[T_TELEFONE];
+    printf("| > Número de telefone do contato a ser deletado: ");
+    fgets(tel_deletar, T_TELEFONE, stdin);
+
+    tel_deletar[strcspn(tel_deletar, "\n")] = '\0';
+
+    for (int i = 0; i < *pos; i++) {
+        int comparacao = strcmp(tel_deletar, contatos[i].telefone);
+        if (comparacao == 0 || tel_deletar[0] == '\0') {
+            int pos_deletar = i;
+            for(int j = pos_deletar; j < *pos - 1; j++){
+                strcpy(contatos[j].nome, contatos[j+1].nome);
+                strcpy(contatos[j].sobrenome, contatos[j+1].sobrenome);
+                strcpy(contatos[j].telefone,  contatos[j+1].telefone);
+                strcpy(contatos[j].email,  contatos[j+1].email);
+                printf("Contato deletado com sucesso!");
+    }
+            (*pos)--;         
+            i--; 
+        }
+    }
 }
 Value listar(Contato tarefas[], int *pos){
     printf("Listar Contato...");
