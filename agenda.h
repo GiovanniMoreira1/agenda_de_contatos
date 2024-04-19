@@ -1,7 +1,7 @@
 #define TOTAL 255
 #define T_NOME 300
 #define T_SOBRENOME 100
-#define T_TELEFONE 15
+#define T_TELEFONE 12
 #define T_EMAIL 100
 
 typedef struct {
@@ -24,3 +24,4 @@ Value carregar(Contato contatos[], int *pos);  // Função de Carregar a lista d
 
 void clearBuffer(); // Função de Limpeza de Buffer
 void formatNumber(char telefone[]); // Função de Formatação de texto do número de telefone
+

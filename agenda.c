@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "agenda.h"
 
 // -------------------------------------------------------------------------- |
@@ -96,4 +97,5 @@ void formatNumber(char telefone[]) {
             telefone[7], telefone[8], telefone[9], telefone[10]);
     }
 }
+
 // -------------------------------------------------------------------------- |
