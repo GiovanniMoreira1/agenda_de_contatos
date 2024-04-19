@@ -5,7 +5,6 @@
 #define T_EMAIL 100
 
 typedef struct {
-    int prioridade;
     char nome[T_NOME];
     char sobrenome[T_SOBRENOME];
     char email[T_EMAIL];
