@@ -1,7 +1,7 @@
 #define TOTAL 255
 #define T_NOME 300
 #define T_SOBRENOME 100
-#define T_TELEFONE 14
+#define T_TELEFONE 12
 #define T_EMAIL 100
 
 typedef struct {
@@ -16,10 +16,12 @@ typedef enum {OK, MAX_CONTATO, SEM_CONTATO, ABRIR, FECHAR, ESCREVER, LER, CRIAR}
 
 typedef Value (*func)(Contato[], int*);
 
-Value criar(Contato tarefas[], int *pos);     // Função de Criar novo Contato
-Value deletar(Contato tarefas[], int *pos);   // Função de Deletar um Contato
-Value listar(Contato tarefas[], int *pos);    // Função de Listar os Contatos
-Value salvar(Contato tarefas[], int *pos);    // Função de Salvar a lista de contatos no arquivo binário
-Value carregar(Contato tarefas[], int *pos);  // Função de Carregar a lista de contatos do arquivo binário
+Value criar(Contato contatos[], int *pos);     // Função de Criar novo Contato
+Value deletar(Contato contatos[], int *pos);   // Função de Deletar um Contato
+Value listar(Contato contatos[], int *pos);    // Função de Listar os Contatos
+Value salvar(Contato contatos[], int *pos);    // Função de Salvar a lista de contatos no arquivo binário
+Value carregar(Contato contatos[], int *pos);  // Função de Carregar a lista de contatos do arquivo binário
 
 void clearBuffer(); // Função de Limpeza de Buffer
+void formatNumber(char telefone[]); // Função de Formatação de texto do número de telefone
+
