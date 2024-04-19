@@ -62,7 +62,23 @@ Value deletar(Contato tarefas[], int *pos){
     printf("Deletar Contato...");
 }
 Value listar(Contato tarefas[], int *pos){
-    printf("Listar Contato...");
+    Value listar(Contato contatos[], int *pos){
+    // if (*pos == 0){
+    //     return SEM_CONTATO;
+    // }
+    for (int i = 0; i < *pos; i++){
+        printf("=================================");
+        printf("| > Nome: %s %s", contatos[i].nome, contatos[i].sobrenome);
+        
+        printf("| > Telefone: %s\n", contatos[i].telefone);
+        
+        printf("| > Email: %s\t", contatos[i].email);
+
+        printf("=================================");
+
+    }
+    return OK;
+}  
 }    
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
