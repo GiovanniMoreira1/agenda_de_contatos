@@ -5,8 +5,9 @@ int main(){
     func funcoes[] = {criar, deletar, listar, salvar, carregar}; // Lista de Funções
 
     Contato contatos[TOTAL];
-
+  
     int pos = 0;
+
     int opcao;
     do{
         printf("\n|------------------------------|\n");
@@ -21,6 +22,7 @@ int main(){
         printf("| > Escolha uma opcao: ");
         scanf("%d", &opcao);
         clearBuffer();
+
 
         opcao--;
         if(opcao <= 4 && opcao >= 0 ){

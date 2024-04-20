@@ -1,7 +1,7 @@
 #define TOTAL 255
 #define T_NOME 300
 #define T_SOBRENOME 100
-#define T_TELEFONE 15
+#define T_TELEFONE 13
 #define T_EMAIL 100
 
 typedef struct {
