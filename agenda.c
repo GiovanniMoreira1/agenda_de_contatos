@@ -9,6 +9,7 @@ Value criar(Contato contatos[], int *pos){
     if( *pos >= TOTAL)
         return MAX_CONTATO;
     
+    printf("Posição: %d", *pos);
 
     printf("| > Nome do Contato: ");
     fgets(contatos[*pos].nome, T_NOME, stdin);
@@ -47,8 +48,8 @@ Value criar(Contato contatos[], int *pos){
     printf("| > Email do Contato: ");
     fgets(contatos[*pos].email, T_EMAIL, stdin);
 
-    *pos == *pos + 1;
-
+    *pos = *pos + 1;
+    printf("Posição: %d", *pos);
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
