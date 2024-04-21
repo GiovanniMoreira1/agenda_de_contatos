@@ -9,12 +9,15 @@ Value criar(Contato contatos[], int *pos){
     if( *pos >= TOTAL)
         return MAX_CONTATO;
     
+    printf("Posição: %d", *pos);
 
     printf("| > Nome do Contato: ");
     fgets(contatos[*pos].nome, T_NOME, stdin);
-    
+    contatos[*pos].nome[strcspn(contatos[*pos].nome, "\n")] = '\0';
+
     printf("| > Sobrenome do Contato: ");
     fgets(contatos[*pos].sobrenome, T_SOBRENOME, stdin);
+    contatos[*pos].sobrenome[strcspn(contatos[*pos].sobrenome, "\n")] = '\0';
 
     char num[T_TELEFONE];
     int numCorrect;
@@ -46,12 +49,14 @@ Value criar(Contato contatos[], int *pos){
 
     printf("| > Email do Contato: ");
     fgets(contatos[*pos].email, T_EMAIL, stdin);
+    contatos[*pos].email[strcspn(contatos[*pos].email, "\n")] = '\0';
 
-    *pos == *pos + 1;
-
+    *pos = *pos + 1;
+    printf("Posição: %d", *pos);
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
+
 
 Value deletar(Contato contatos[], int *pos){
     char tel_deletar[T_TELEFONE];
@@ -63,24 +68,40 @@ Value deletar(Contato contatos[], int *pos){
 
      for (int i = 0; i < *pos; i++) {
         int comparacao = strcmp(tel_deletar, contatos[i].telefone);
-        printf("%s\n", contatos[i].telefone);
         if (comparacao == 0) {
-            printf("comparacao deu certo\n");
             for(int j = i; j < *pos - 1; j++){
                 strcpy(contatos[j].nome, contatos[j+1].nome);
                 strcpy(contatos[j].sobrenome, contatos[j+1].sobrenome);
                 strcpy(contatos[j].telefone,  contatos[j+1].telefone);
                 strcpy(contatos[j].email,  contatos[j+1].email);
             }
-            printf("Contato deletado com sucesso!\n");
+            printf("\nContato deletado com sucesso!\n");
             (*pos)--;
             return OK;
     }
-     }
+        else {
+                printf("\nEste número de telefone não está em seus contatos.\n");
+            }
+    }
 }
-Value listar(Contato contatos[], int *pos){
-    printf("Listar Contatos...");
-}
+Value listar(Contato contatos[], int *pos) {
+    if (*pos == 0) {
+        return SEM_CONTATO;
+    }
+    for (int i = 0; i < *pos; i++) {
+        printf("=================================\n");
+        printf("| > Nome: %s %s \n", contatos[i].nome, contatos[i].sobrenome);
+        
+        printf("| > Telefone: %s\n", contatos[i].telefone);
+        
+        printf("| > Email: %s \n", contatos[i].email);
+
+        printf("=================================\n");
+    }
+    return OK;
+} 
+
+
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
 Value salvar(Contato contatos[], int *pos){
