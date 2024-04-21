@@ -52,12 +52,11 @@ Value criar(Contato contatos[], int *pos){
     contatos[*pos].email[strcspn(contatos[*pos].email, "\n")] = '\0';
 
     *pos = *pos + 1;
-    printf("Posição: %d", *pos);
+
+
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
-
-
 Value deletar(Contato contatos[], int *pos){
     char tel_deletar[T_TELEFONE];
     printf("| > Número de telefone do contato a ser deletado: ");
@@ -84,6 +83,7 @@ Value deletar(Contato contatos[], int *pos){
             }
     }
 }
+
 Value listar(Contato contatos[], int *pos) {
     if (*pos == 0) {
         return SEM_CONTATO;
@@ -99,9 +99,10 @@ Value listar(Contato contatos[], int *pos) {
         printf("=================================\n");
     }
     return OK;
-} 
+}
 
 
+    
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
 Value salvar(Contato contatos[], int *pos){
