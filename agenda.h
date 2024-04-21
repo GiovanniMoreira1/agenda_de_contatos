@@ -1,11 +1,10 @@
 #define TOTAL 255
 #define T_NOME 300
 #define T_SOBRENOME 100
-#define T_TELEFONE 12
+#define T_TELEFONE 13
 #define T_EMAIL 100
 
 typedef struct {
-    int prioridade;
     char nome[T_NOME];
     char sobrenome[T_SOBRENOME];
     char email[T_EMAIL];
@@ -23,5 +22,3 @@ Value salvar(Contato contatos[], int *pos);    // Função de Salvar a lista de 
 Value carregar(Contato contatos[], int *pos);  // Função de Carregar a lista de contatos do arquivo binário
 
 void clearBuffer(); // Função de Limpeza de Buffer
-void formatNumber(char telefone[]); // Função de Formatação de texto do número de telefone
-

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
 #include "agenda.h"
 
 // -------------------------------------------------------------------------- |
@@ -37,18 +36,13 @@ Value criar(Contato contatos[], int *pos){
             }
         }
 
-        if(numCorrect){ // Se passou nas validações anteriores faz a formatação do número
-            formatNumber(num);
-        }
         else{
             printf("| > Telefone Inválido, tente novamente...\n");
             num[0] = '\0';
         }
     }while(!numCorrect);
-
     strcpy(contatos[*pos].telefone, num);
-    // printf("\n| > %s", contatos[*pos].telefone);
-
+    //printf("| > Número: %s\n", contatos[*pos].telefone);
 
     printf("| > Email do Contato: ");
     fgets(contatos[*pos].email, T_EMAIL, stdin);
@@ -58,38 +52,41 @@ Value criar(Contato contatos[], int *pos){
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
+
 Value deletar(Contato contatos[], int *pos){
     char tel_deletar[T_TELEFONE];
     printf("| > Número de telefone do contato a ser deletado: ");
     fgets(tel_deletar, T_TELEFONE, stdin);
 
     tel_deletar[strcspn(tel_deletar, "\n")] = '\0';
+    printf("%s", tel_deletar);
 
-    for (int i = 0; i < *pos; i++) {
+     for (int i = 0; i < *pos; i++) {
         int comparacao = strcmp(tel_deletar, contatos[i].telefone);
-        if (comparacao == 0 || tel_deletar[0] == '\0') {
-            int pos_deletar = i;
-            for(int j = pos_deletar; j < *pos - 1; j++){
+        printf("%s\n", contatos[i].telefone);
+        if (comparacao == 0) {
+            printf("comparacao deu certo\n");
+            for(int j = i; j < *pos - 1; j++){
                 strcpy(contatos[j].nome, contatos[j+1].nome);
                 strcpy(contatos[j].sobrenome, contatos[j+1].sobrenome);
                 strcpy(contatos[j].telefone,  contatos[j+1].telefone);
                 strcpy(contatos[j].email,  contatos[j+1].email);
-                printf("Contato deletado com sucesso!");
+            }
+            printf("Contato deletado com sucesso!\n");
+            (*pos)--;
+            return OK;
     }
-            (*pos)--;         
-            i--; 
-        }
-    }
+     }
 }
-Value listar(Contato tarefas[], int *pos){
-    printf("Listar Contato...");
-}    
+Value listar(Contato contatos[], int *pos){
+    printf("Listar Contatos...");
+}
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
-Value salvar(Contato tarefas[], int *pos){
+Value salvar(Contato contatos[], int *pos){
     printf("Salvar Arquivo de Contatos...");
 }
-Value carregar(Contato tarefas[], int *pos){
+Value carregar(Contato contatos[], int *pos){
     printf("Carregar Arquivo de Contatos...");
 } 
 // -------------------------------------------------------------------------- |
@@ -97,25 +94,6 @@ Value carregar(Contato tarefas[], int *pos){
 void clearBuffer(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
-}
-
-void formatNumber(char telefone[]) {
-
-    // Verifica o tamanho do número de telefone
-    int tamanho = strlen(telefone);
-    if (tamanho == 10) {
-        // Formata como telefone: 11 1234-1234
-        sprintf(telefone, "%c%c %c%c%c%c-%c%c%c%c",
-            telefone[0], telefone[1],
-            telefone[2], telefone[3], telefone[4], telefone[5],
-            telefone[6], telefone[7], telefone[8], telefone[9]);
-    } else if (tamanho == 11) {
-        // Formata como celular: 11 91234-1234
-        sprintf(telefone, "%c%c %c%c%c%c%c-%c%c%c%c",
-            telefone[0], telefone[1],
-            telefone[2], telefone[3], telefone[4], telefone[5], telefone[6],
-            telefone[7], telefone[8], telefone[9], telefone[10]);
-    }
 }
 
 // -------------------------------------------------------------------------- |
