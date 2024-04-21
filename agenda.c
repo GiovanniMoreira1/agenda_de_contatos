@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
 #include "agenda.h"
 
 // -------------------------------------------------------------------------- |
@@ -37,18 +36,13 @@ Value criar(Contato contatos[], int *pos){
             }
         }
 
-        if(numCorrect){ // Se passou nas validações anteriores faz a formatação do número
-            formatNumber(num);
-        }
         else{
             printf("| > Telefone Inválido, tente novamente...\n");
             num[0] = '\0';
         }
     }while(!numCorrect);
-
     strcpy(contatos[*pos].telefone, num);
-    // printf("\n| > %s", contatos[*pos].telefone);
-
+    //printf("| > Número: %s\n", contatos[*pos].telefone);
 
     printf("| > Email do Contato: ");
     fgets(contatos[*pos].email, T_EMAIL, stdin);
@@ -58,9 +52,10 @@ Value criar(Contato contatos[], int *pos){
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
-Value deletar(Contato tarefas[], int *pos){
+Value deletar(Contato contatos[], int *pos){
     printf("Deletar Contato...");
 }
+
 Value listar(Contato tarefas[], int *pos){
     Value listar(Contato contatos[], int *pos){
     // if (*pos == 0){
@@ -79,13 +74,14 @@ Value listar(Contato tarefas[], int *pos){
     }
     return OK;
 }  
+
 }    
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
-Value salvar(Contato tarefas[], int *pos){
+Value salvar(Contato contatos[], int *pos){
     printf("Salvar Arquivo de Contatos...");
 }
-Value carregar(Contato tarefas[], int *pos){
+Value carregar(Contato contatos[], int *pos){
     printf("Carregar Arquivo de Contatos...");
 } 
 // -------------------------------------------------------------------------- |
@@ -93,25 +89,6 @@ Value carregar(Contato tarefas[], int *pos){
 void clearBuffer(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
-}
-
-void formatNumber(char telefone[]) {
-
-    // Verifica o tamanho do número de telefone
-    int tamanho = strlen(telefone);
-    if (tamanho == 10) {
-        // Formata como telefone: 11 1234-1234
-        sprintf(telefone, "%c%c %c%c%c%c-%c%c%c%c",
-            telefone[0], telefone[1],
-            telefone[2], telefone[3], telefone[4], telefone[5],
-            telefone[6], telefone[7], telefone[8], telefone[9]);
-    } else if (tamanho == 11) {
-        // Formata como celular: 11 91234-1234
-        sprintf(telefone, "%c%c %c%c%c%c%c-%c%c%c%c",
-            telefone[0], telefone[1],
-            telefone[2], telefone[3], telefone[4], telefone[5], telefone[6],
-            telefone[7], telefone[8], telefone[9], telefone[10]);
-    }
 }
 
 // -------------------------------------------------------------------------- |
