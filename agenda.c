@@ -52,7 +52,8 @@ Value criar(Contato contatos[], int *pos){
     contatos[*pos].email[strcspn(contatos[*pos].email, "\n")] = '\0';
 
     *pos = *pos + 1;
-    printf("Posição: %d", *pos);
+
+
     printf("| > Contato Salvo com Sucesso!!");
     return OK;
 }
@@ -60,26 +61,25 @@ Value deletar(Contato contatos[], int *pos){
     printf("Deletar Contato...");
 }
 
-Value listar(Contato tarefas[], int *pos){
-    Value listar(Contato contatos[], int *pos){
-    // if (*pos == 0){
-    //     return SEM_CONTATO;
-    // }
-    for (int i = 0; i < *pos; i++){
-        printf("=================================");
-        printf("| > Nome: %s %s", contatos[i].nome, contatos[i].sobrenome);
+Value listar(Contato contatos[], int *pos) {
+    if (*pos == 0) {
+        return SEM_CONTATO;
+    }
+    for (int i = 0; i < *pos; i++) {
+        printf("=================================\n");
+        printf("| > Nome: %s %s \n", contatos[i].nome, contatos[i].sobrenome);
         
         printf("| > Telefone: %s\n", contatos[i].telefone);
         
-        printf("| > Email: %s\t", contatos[i].email);
+        printf("| > Email: %s \n", contatos[i].email);
 
-        printf("=================================");
-
+        printf("=================================\n");
     }
     return OK;
-}  
+}
 
-}    
+
+    
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
 Value salvar(Contato contatos[], int *pos){
