@@ -9,8 +9,6 @@ Value criar(Contato contatos[], int *pos){
     if( *pos >= TOTAL)
         return MAX_CONTATO;
     
-    printf("Posição: %d", *pos);
-
     printf("| > Nome do Contato: ");
     fgets(contatos[*pos].nome, T_NOME, stdin);
     contatos[*pos].nome[strcspn(contatos[*pos].nome, "\n")] = '\0';
@@ -58,7 +56,31 @@ Value criar(Contato contatos[], int *pos){
     return OK;
 }
 Value deletar(Contato contatos[], int *pos){
-    printf("Deletar Contato...");
+    char tel_deletar[T_TELEFONE];
+    printf("| > Número de telefone do contato a ser deletado: ");
+    fgets(tel_deletar, T_TELEFONE, stdin);
+
+    tel_deletar[strcspn(tel_deletar, "\n")] = '\0';
+    printf("%s", tel_deletar);
+
+     for (int i = 0; i < *pos; i++) {
+        int comparacao = strcmp(tel_deletar, contatos[i].telefone);
+        if (comparacao == 0) {
+            for(int j = i; j < *pos - 1; j++){
+                strcpy(contatos[j].nome, contatos[j+1].nome);
+                strcpy(contatos[j].sobrenome, contatos[j+1].sobrenome);
+                strcpy(contatos[j].telefone,  contatos[j+1].telefone);
+                strcpy(contatos[j].email,  contatos[j+1].email);
+            }
+            printf("\nContato deletado com sucesso!\n");
+            (*pos)--;
+            return OK;
+    }
+        else {
+                printf("\nEste número de telefone não está em seus contatos.\n");
+            }
+    }
+
 }
 
 Value listar(Contato contatos[], int *pos) {
