@@ -9,8 +9,6 @@ Value criar(Contato contatos[], int *pos){
     if( *pos >= TOTAL)
         return MAX_CONTATO;
     
-    printf("Posição: %d", *pos);
-
     printf("| > Nome do Contato: ");
     fgets(contatos[*pos].nome, T_NOME, stdin);
     contatos[*pos].nome[strcspn(contatos[*pos].nome, "\n")] = '\0';
