@@ -56,6 +56,7 @@ Value criar(Contato contatos[], int *pos){
     return OK;
 }
 Value deletar(Contato contatos[], int *pos){
+ 4-funcionalidade-3-deletar-contato
     char tel_deletar[T_TELEFONE];
     printf("| > Número de telefone do contato a ser deletado: ");
     fgets(tel_deletar, T_TELEFONE, stdin);
@@ -80,6 +81,7 @@ Value deletar(Contato contatos[], int *pos){
                 printf("\nEste número de telefone não está em seus contatos.\n");
             }
     }
+
 }
 
 Value listar(Contato contatos[], int *pos) {
