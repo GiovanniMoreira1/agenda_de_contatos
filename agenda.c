@@ -100,13 +100,27 @@ Value listar(Contato contatos[], int *pos) {
     return OK;
 }
 
-
-    
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
 Value salvar(Contato contatos[], int *pos){
-    printf("Salvar Arquivo de Contatos...");
+   FILE *arq = fopen("contatos.bin", "wb");
+    if(arq == NULL)
+        return ABRIR;
+    
+    int qtd = fwrite(contatos, TOTAL, sizeof(Contato), arq);
+    if(qtd == 0)
+        return ESCREVER;
+
+    qtd = fwrite(pos, 1, sizeof(int), arq);
+    if(qtd == 0)
+        return ESCREVER;
+
+    if(fclose(arq))
+        return FECHAR;
+
+    return OK;
 }
+
 Value carregar(Contato contatos[], int *pos){
    FILE *f = fopen("contatos.bin", "rb");
     if(f == NULL)
