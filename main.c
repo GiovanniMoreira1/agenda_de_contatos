@@ -5,7 +5,6 @@ int main(){
     func funcoes[] = {criar, deletar, listar, salvar, carregar}; // Lista de Funções
 
     Contato contatos[TOTAL];
-  
     int pos = 0;
 
     int opcao;

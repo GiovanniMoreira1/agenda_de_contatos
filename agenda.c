@@ -123,6 +123,7 @@ Value salvar(Contato contatos[], int *pos){
 
 Value carregar(Contato contatos[], int *pos){
    FILE *f = fopen("contatos.bin", "rb");
+   printf("Contatos carregados!");
     if(f == NULL)
     return ABRIR;
 
@@ -138,6 +139,7 @@ Value carregar(Contato contatos[], int *pos){
         return FECHAR;
 
 return OK;
+
 }
 
 // -------------------------------------------------------------------------- |
