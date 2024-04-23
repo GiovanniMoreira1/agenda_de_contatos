@@ -5,7 +5,6 @@ int main(){
     func funcoes[] = {criar, deletar, listar, salvar, carregar}; // Lista de Funções
 
     Contato contatos[TOTAL];
-  
     int pos = 0;
 
     int opcao;
@@ -29,6 +28,7 @@ int main(){
             Value res = funcoes[opcao](contatos, &pos); // Chama a Função Respectiva a opção escolhida
         }
         else if(opcao == -1){
+            funcoes[3](contatos, &pos); // Salva o Arquivo Binário Antes de Encerrar
             printf("| > Sair...\n");
         }
         else{
