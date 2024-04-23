@@ -108,8 +108,24 @@ Value salvar(Contato contatos[], int *pos){
     printf("Salvar Arquivo de Contatos...");
 }
 Value carregar(Contato contatos[], int *pos){
-    printf("Carregar Arquivo de Contatos...");
-} 
+   FILE *f = fopen("contatos.bin", "rb");
+    if(f == NULL)
+    return ABRIR;
+
+    int qtd = fread(contatos, TOTAL, sizeof(Contato), f);
+    if(qtd == 0)
+        return LER;
+
+    qtd = fread(pos, 1, sizeof(int), f);
+    if(qtd == 0)
+       return LER;
+
+    if(fclose(f))
+        return FECHAR;
+
+return OK;
+}
+
 // -------------------------------------------------------------------------- |
 // > Funções Complementares ------------------------------------------------- |
 void clearBuffer(){
