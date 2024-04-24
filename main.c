@@ -25,8 +25,26 @@ int main(){
 
         opcao--;
         if(opcao <= 4 && opcao >= 0 ){
-            Value res = funcoes[opcao](contatos, &pos); // Chama a Função Respectiva a opção escolhida
+            Value erro = funcoes[opcao](contatos, &pos); // Chama a Função Respectiva a opção escolhida
+        
+                    if (erro == MAX_CONTATO) {
+                printf("ERRO - Máximo de contatos atingido.\n");
+            } else if (erro == CRIAR) {
+                printf("ERRO - Não foi possível criar o arquivo.\n");
+            } else if (erro == SEM_CONTATO) {
+                printf("ERRO - Não existem contatos salvos.\n");
+            } else if (erro == ABRIR) {
+                printf("ERRO - Não foi possível abrir o arquivo.\n");
+            } else if (erro == FECHAR) {
+                printf("ERRO - Não foi possível fechar o arquivo.\n");
+            } else if (erro == ESCREVER) {
+                printf("ERRO - Não foi possível escrever em seu arquivo.\n");
+            } else if (erro == LER) {
+                printf("ERRO - Não foi possível ler o seu arquivo.\n");
+            } 
         }
+
+
         else if(opcao == -1){
             funcoes[3](contatos, &pos); // Salva o Arquivo Binário Antes de Encerrar
             printf("| > Sair...\n");
