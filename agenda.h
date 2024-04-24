@@ -21,4 +21,11 @@ Value listar(Contato contatos[], int *pos);    // Função de Listar os Contatos
 Value salvar(Contato contatos[], int *pos);    // Função de Salvar a lista de contatos no arquivo binário
 Value carregar(Contato contatos[], int *pos);  // Função de Carregar a lista de contatos do arquivo binário
 
+
 void clearBuffer(); // Função de Limpeza de Buffer
+void tratarRes(Value err); // Tratamento de Erros das funções de tipo Value
+
+// \033[0m -> Cor Padrão de texto
+// \033[34m -> Cor azul  - Utilizado no menu
+// \033[32m -> Cor Verde - Utilizado para mensagens de sucesso de funções
+// \033[31m -> Cor Vermelha - Utilizado para mensagens de erro
