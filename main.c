@@ -7,6 +7,9 @@ int main(){
     Contato contatos[TOTAL];
     int pos = 0;
 
+    Value carregar = funcoes[4](contatos, &pos); // Carrega o arquivo contatos.bin caso ele já exista
+    tratarRes(carregar); // Tratamento do Erro recebido da função;
+
     int opcao;
     do{
         printf("\n\033[34m|==============================|\n");

@@ -88,13 +88,22 @@ Value listar(Contato contatos[], int *pos) {
         return SEM_CONTATO;
     }
     for (int i = 0; i < *pos; i++) {
+
         printf("|===============================\n");
         printf("| > Nome: %s %s \n", contatos[i].nome, contatos[i].sobrenome);
         
-        printf("| > Telefone: %s\n", contatos[i].telefone);
-        
-        printf("| > Email: %s \n", contatos[i].email);
+        if (strlen(contatos[i].telefone) == 10) {// Verifica o tipo de telefone e formata conforme necessário
+            // Formato para telefones com 10 dígitos (XX) XXXX-XXXX
+            printf("| > Telefone: (%.*s) %.*s-%.*s\n", 2, contatos[i].telefone, 4, contatos[i].telefone + 2, 4, contatos[i].telefone + 6);
+        } else if (strlen(contatos[i].telefone) == 11) {
+            // Formato para telefones com 11 dígitos (XX) 9XXXX-XXXX
+            printf("| > Telefone: (%.*s) %.*s-%.*s\n", 2, contatos[i].telefone, 5, contatos[i].telefone + 2, 4, contatos[i].telefone + 7 );
+        } else {
+            // Outros formatos de telefone
+            printf("| > Telefone: %s\n", contatos[i].telefone);
+        }
 
+        printf("| > Email: %s \n", contatos[i].email);
         printf("|===============================\n");
     }
     return OK;
