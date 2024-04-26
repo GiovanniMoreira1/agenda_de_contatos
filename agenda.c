@@ -52,7 +52,7 @@ Value criar(Contato contatos[], int *pos){
     *pos = *pos + 1;
 
 
-    printf("| > Contato Salvo com Sucesso!!");
+    printf("\033[32m| > Contato Salvo com Sucesso!!\n");
     return OK;
 }
 Value deletar(Contato contatos[], int *pos){
@@ -72,12 +72,12 @@ Value deletar(Contato contatos[], int *pos){
                 strcpy(contatos[j].telefone,  contatos[j+1].telefone);
                 strcpy(contatos[j].email,  contatos[j+1].email);
             }
-            printf("\nContato deletado com sucesso!\n");
+            printf("\033[32m| > Contato deletado com sucesso!!\n");
             (*pos)--;
             return OK;
     }
         else {
-                printf("\nEste número de telefone não está em seus contatos.\n");
+                printf("| > Este número de telefone não está em seus contatos.\n");
             }
     }
 
@@ -88,14 +88,23 @@ Value listar(Contato contatos[], int *pos) {
         return SEM_CONTATO;
     }
     for (int i = 0; i < *pos; i++) {
-        printf("=================================\n");
+
+        printf("|===============================\n");
         printf("| > Nome: %s %s \n", contatos[i].nome, contatos[i].sobrenome);
         
-        printf("| > Telefone: %s\n", contatos[i].telefone);
-        
-        printf("| > Email: %s \n", contatos[i].email);
+        if (strlen(contatos[i].telefone) == 10) {// Verifica o tipo de telefone e formata conforme necessário
+            // Formato para telefones com 10 dígitos (XX) XXXX-XXXX
+            printf("| > Telefone: (%.*s) %.*s-%.*s\n", 2, contatos[i].telefone, 4, contatos[i].telefone + 2, 4, contatos[i].telefone + 6);
+        } else if (strlen(contatos[i].telefone) == 11) {
+            // Formato para telefones com 11 dígitos (XX) 9XXXX-XXXX
+            printf("| > Telefone: (%.*s) %.*s-%.*s\n", 2, contatos[i].telefone, 5, contatos[i].telefone + 2, 4, contatos[i].telefone + 7 );
+        } else {
+            // Outros formatos de telefone
+            printf("| > Telefone: %s\n", contatos[i].telefone);
+        }
 
-        printf("=================================\n");
+        printf("| > Email: %s \n", contatos[i].email);
+        printf("|===============================\n");
     }
     return OK;
 }
@@ -118,12 +127,12 @@ Value salvar(Contato contatos[], int *pos){
     if(fclose(arq))
         return FECHAR;
 
+    printf("\033[32m| > Arquivo Salvo!!\n");
     return OK;
 }
 
 Value carregar(Contato contatos[], int *pos){
-   FILE *f = fopen("contatos.bin", "rb");
-   printf("Contatos carregados!");
+    FILE *f = fopen("contatos.bin", "rb");
     if(f == NULL)
     return ABRIR;
 
@@ -138,7 +147,8 @@ Value carregar(Contato contatos[], int *pos){
     if(fclose(f))
         return FECHAR;
 
-return OK;
+    printf("\033[32m| > Contatos carregados!!\n");
+    return OK;
 
 }
 
@@ -147,6 +157,31 @@ return OK;
 void clearBuffer(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
+}
+
+
+void tratarRes(Value err){
+    if (err == MAX_CONTATO) {
+        printf("\033[31m| ERRO - Máximo de contatos atingido.\n");
+    } else if (err == CRIAR) {
+        printf("\033[31m| ERRO - Não foi possível criar o arquivo.\n");
+    } else if (err == SEM_CONTATO) {
+        printf("\033[31m| ERRO - Não existem contatos salvos.\n");
+    } else if (err == ABRIR) {
+        printf("\033[31m| ERRO - Não foi possível abrir o arquivo.\n");
+    } else if (err == FECHAR) {
+        printf("\033[31m| ERRO - Não foi possível fechar o arquivo.\n");
+    } else if (err == ESCREVER) {
+        printf("\033[31m| ERRO - Não foi possível escrever em seu arquivo.\n");
+    } else if (err == LER) {
+        printf("\033[31m| ERRO - Não foi possível ler o seu arquivo.\n");
+    } else if (err == OK) {
+        // Fazer nada em caso de sucesso 
+    } 
+    else{
+        printf("\033[31m| ERRO - Erro de Sistema Desconhecido.\n");
+    }
+    
 }
 
 // -------------------------------------------------------------------------- |
