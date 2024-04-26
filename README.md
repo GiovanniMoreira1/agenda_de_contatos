@@ -1,6 +1,6 @@
 # *Projeto 3* (Ciência da computação | 2º ciclo) - 2024
 ## Agenda de Contatos ##
-Este programa se trata da **Agenda de Contatos!** Este é um simples, mas poderoso projeto desenvolvido pelos alunos de Desenvolvimentos de Algoritmo da FEI, para ajudá-lo a gerenciar e organizar seus contatos de forma eficiente e organizada. Com esta aplicação, você poderá armazenar informações essenciais de seus contatos, como nome, número de telefone e endereço de e-mail em um único lugar acessível.
+Este programa se trata da **Agenda de Contatos!** Este é um simples, mas poderoso projeto desenvolvido na linguagem C pelos alunos de Desenvolvimentos de Algoritmo da FEI, para ajudá-lo a gerenciar e organizar seus contatos de forma eficiente e organizada. Com esta aplicação, você poderá armazenar informações essenciais de seus contatos, como nome, número de telefone e endereço de e-mail em um único lugar acessível.
 ### Funcionalidades principais: ###
 1. Criar contatos | Adicione contatos em seu sistema utilizando informações essenciais como nome, telefone e e-mail. 
 2. Deletar contatos | Remove contatos baseado no número de telefone desejado.
