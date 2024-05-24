@@ -2,13 +2,15 @@
 #include "agenda.h"
 
 int main(){
-    func funcoes[] = {criar, deletar, atualizar, listar, salvar, carregar}; // Lista de Funções
+    func funcoes[] = {criar, deletar, atualizar, listar}; // Lista de Funções
 
-    Contato contatos[TOTAL];
-    int pos = 0;
+    Contato pessoal[TOTAL];
+    Contato business[TOTAL];
+    int pos_p = 0;
+    int pos_b = 0;
 
-    Value carregar = funcoes[4](contatos, &pos); // Carrega o arquivo contatos.bin caso ele já exista
-    tratarRes(carregar); // Tratamento do Erro recebido da função;
+    Value load = carregar(pessoal, &pos_p, business, &pos_b); // Carrega o arquivo contatos.bin caso ele já exista
+    tratarRes(load); // Tratamento do Erro recebido da função;
 
     int opcao;
     do{
@@ -29,8 +31,21 @@ int main(){
 
         opcao--;
         if(opcao <= 5 && opcao >= 0 ){ // Condição para quando o usuário utilizar uma função
-            Value erro = funcoes[opcao](contatos, &pos); // Chama a Função Respectiva a opção escolhida
-            tratarRes(erro); // Tratamento do Erro recebido da função;
+            char opc;
+            printf("| > Qual agenda será feita esta ação (p/b): ");
+            scanf("%c", &opc);
+            clearBuffer();
+            if (opc == 'p') {
+                Value erro = funcoes[opcao](pessoal, &pos_p); // Chama a Função Respectiva a opção escolhida
+                tratarRes(erro); // Tratamento do Erro recebido da função;  
+            }  
+            else if (opc == 'b') {
+                Value erro = funcoes[opcao](business, &pos_b); // Chama a Função Respectiva a opção escolhida
+                tratarRes(erro); // Tratamento do Erro recebido da função;
+            }
+            else {
+                printf("| > Opção inválida, tente novamente!");
+            }
             printf("\033[34m| Pressione Enter para continuar |\n");
             printf("| ============================== |\n");
             clearBuffer();
@@ -43,7 +58,7 @@ int main(){
             clearBuffer();
 
             if(Opc == 'y'){ // Caso Queira Salvar as Alterações
-                Value res = funcoes[3](contatos, &pos); // Salva o Arquivo Binário Antes de Encerrar
+                Value res = salvar(pessoal, &pos_p, business, &pos_b); // Salva o Arquivo Binário Antes de Encerrar
                 tratarRes(res); // Tratamento do valor recebido da função;
                 if(res == OK){ // Salvar funcionou corretamente, encerrando normalmente
                     printf("\033[34m| > Encerrando...\n");
