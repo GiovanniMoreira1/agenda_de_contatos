@@ -2,7 +2,7 @@
 #include "agenda.h"
 
 int main(){
-    func funcoes[] = {criar, deletar, listar, salvar, carregar}; // Lista de Funções
+    func funcoes[] = {criar, deletar, atualizar, listar, salvar, carregar}; // Lista de Funções
 
     Contato contatos[TOTAL];
     int pos = 0;
@@ -16,9 +16,10 @@ int main(){
         printf("|- - - Agenda de Contatos - - -|\n");
         printf("| 1 - Criar Contato            |\n");
         printf("| 2 - Deletar Contato          |\n");
-        printf("| 3 - Listar Contatos          |\n");
-        printf("| 4 - Salvar Contatos          |\n");
-        printf("| 5 - Carregar Contatos        |\n");
+        printf("| 3 - Atualizar Contato        |\n");
+        printf("| 4 - Listar Contatos          |\n");
+        printf("| 5 - Salvar Contatos          |\n");
+        printf("| 6 - Carregar Contatos        |\n");
         printf("| 0 - Sair                     |\n");
         printf("|==============================|\n");
         printf("| > Escolha uma opcao: ");
@@ -27,7 +28,7 @@ int main(){
 
 
         opcao--;
-        if(opcao <= 4 && opcao >= 0 ){ // Condição para quando o usuário utilizar uma função
+        if(opcao <= 5 && opcao >= 0 ){ // Condição para quando o usuário utilizar uma função
             Value erro = funcoes[opcao](contatos, &pos); // Chama a Função Respectiva a opção escolhida
             tratarRes(erro); // Tratamento do Erro recebido da função;
             printf("\033[34m| Pressione Enter para continuar |\n");
