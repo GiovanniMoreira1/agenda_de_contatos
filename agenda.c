@@ -55,6 +55,7 @@ Value criar(Contato contatos[], int *pos){
     printf("\033[32m| > Contato Salvo com Sucesso!!\n");
     return OK;
 }
+
 Value deletar(Contato contatos[], int *pos){
     char tel_deletar[T_TELEFONE];
     printf("| > Número de telefone do contato a ser deletado: ");
@@ -80,6 +81,117 @@ Value deletar(Contato contatos[], int *pos){
                 printf("| > Este número de telefone não está em seus contatos.\n");
             }
     }
+
+}
+
+Value atualizar(Contato contatos[], int *pos){   // Função de Atualizar um Contato
+    if (*pos == 0) {
+        return SEM_CONTATO;
+    }
+
+    int posicao;
+    int opcaoValidation;
+    
+    do{
+        opcaoValidation = 1;
+
+        char name[T_NOME]; 
+        char num[T_TELEFONE];
+        char escolha;
+        printf("| > Buscar contato pelo telefone ou nome? (t/n) ");
+        scanf("%c", &escolha);
+        clearBuffer();
+
+        if(escolha == 't'){
+            printf("| > Número de telefone do contato: ");
+            fgets(num, T_TELEFONE, stdin);
+            num[strcspn(num, "\n")] = '\0';
+
+            int local = -1;
+            for(int i = 0; i < *pos; i++){
+                if(strcmp(num, contatos[i].telefone) == 0){
+                    local = i;
+                }
+            }
+
+            if(local == -1){
+                printf("| > Este número de telefone não está em seus contatos.\n");
+                opcaoValidation = 0;
+            }
+            else{
+                posicao = local;
+            }
+        } 
+        else if (escolha == 'n'){
+            printf("| > Nome do contato: ");
+            fgets(name, T_NOME, stdin);
+            name[strcspn(name, "\n")] = '\0';
+
+            int local = -1;
+            for(int i = 0; i < *pos; i++){
+                if(strcmp(name, contatos[i].nome) == 0){
+                    local = i;
+                }
+            }
+
+            if(local == -1){
+                printf("| > Este nome não está em seus contatos.\n");
+                opcaoValidation = 0;
+            }
+            else{
+                posicao = local;
+            }
+        }
+        else{
+            printf("| > Opção Inválida, tente novamente...\n");
+            opcaoValidation = 0;
+        }
+    }while(!opcaoValidation);
+
+    printf("| > Atualizar Nome: ");
+    fgets(contatos[posicao].nome, T_NOME, stdin);
+    contatos[posicao].nome[strcspn(contatos[posicao].nome, "\n")] = '\0';
+
+    printf("| > Atualizar Sobrenome: ");
+    fgets(contatos[posicao].sobrenome, T_SOBRENOME, stdin);
+    contatos[posicao].sobrenome[strcspn(contatos[posicao].sobrenome, "\n")] = '\0';
+
+    char num[T_TELEFONE];
+    int numCorrect;
+    do{
+        numCorrect = 1;
+        printf("| > Atualizar o Telefone (Ex: 01234567890): ");
+        fgets(num, T_TELEFONE, stdin);
+
+        num[strcspn(num, "\n")] = '\0'; // Remove o \n do final do número informado;
+        if(strlen(num) > 12 || strlen(num) < 10){ // Verifica se o tamanho do número é válido
+            numCorrect = 0;
+        }
+        if(numCorrect){
+            for (int i = 0; num[i] != '\0'; i++) { // Verifica se não há nenhum char não numérico no número informado;
+                if (!isdigit(num[i]) && num[i] != '\0') {
+                    numCorrect = 0;
+                    break;
+                }
+            }
+        }
+
+        else{
+            printf("| > Telefone Inválido, tente novamente...\n");
+            num[0] = '\0';
+        }
+    }while(!numCorrect);
+    strcpy(contatos[posicao].telefone, num);
+    //printf("| > Número: %s\n", contatos[*pos].telefone);
+
+    printf("| > Email do Contato: ");
+    fgets(contatos[posicao].email, T_EMAIL, stdin);
+    contatos[posicao].email[strcspn(contatos[posicao].email, "\n")] = '\0';
+
+
+    printf("\033[32m| > Contato Atualizado com Sucesso!!\n");
+    return OK;
+
 
 }
 
