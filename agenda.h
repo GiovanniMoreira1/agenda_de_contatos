@@ -25,6 +25,10 @@ Value carregar(Contato contatos[], int *pos);  // Função de Carregar a lista d
 void clearBuffer(); // Função de Limpeza de Buffer
 void tratarRes(Value err); // Tratamento de Erros das funções de tipo Value
 
+// Funções de Validação:
+int numberValidation(Contato contatos[], int pos, const char num[T_TELEFONE]);
+int emailValidation(const char email[T_EMAIL]);
+
 // \033[0m -> Cor Padrão de texto
 // \033[34m -> Cor azul  - Utilizado no menu
 // \033[32m -> Cor Verde - Utilizado para mensagens de sucesso de funções
