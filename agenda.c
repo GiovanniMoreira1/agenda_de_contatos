@@ -243,19 +243,27 @@ Value listar(Contato contatos[], int *pos) {
 
 // -------------------------------------------------------------------------- |
 // > Funções de Manipulação de Arquivo -------------------------------------- |
-Value salvar(Contato contatos[], int *pos){
+Value salvar(Contato pessoal[], int *pos_p, Contato business[], int *pos_b){
    FILE *arq = fopen("contatos.bin", "wb");
     if(arq == NULL)
         return ABRIR;
     
-    int qtd = fwrite(contatos, TOTAL, sizeof(Contato), arq);
+    int qtd = fwrite(pessoal, TOTAL, sizeof(Contato), arq);
     if(qtd == 0)
         return ESCREVER;
 
-    qtd = fwrite(pos, 1, sizeof(int), arq);
+    qtd = fwrite(pos_p, 1, sizeof(int), arq);
     if(qtd == 0)
         return ESCREVER;
 
+    qtd = fwrite(business, TOTAL, sizeof(Contato), arq);
+    if(qtd == 0)
+        return ESCREVER;
+
+    qtd = fwrite(pos_b, 1, sizeof(int), arq);
+    if(qtd == 0)
+        return ESCREVER;
+    
     if(fclose(arq))
         return FECHAR;
 
@@ -263,16 +271,24 @@ Value salvar(Contato contatos[], int *pos){
     return OK;
 }
 
-Value carregar(Contato contatos[], int *pos){
+Value carregar(Contato pessoal[], int *pos_p, Contato business[], int *pos_b){
     FILE *f = fopen("contatos.bin", "rb");
     if(f == NULL)
     return ABRIR;
 
-    int qtd = fread(contatos, TOTAL, sizeof(Contato), f);
+    int qtd = fread(pessoal, TOTAL, sizeof(Contato), f);
     if(qtd == 0)
         return LER;
 
-    qtd = fread(pos, 1, sizeof(int), f);
+    qtd = fread(pos_p, 1, sizeof(int), f);
+    if(qtd == 0)
+       return LER;
+
+    qtd = fread(business, TOTAL, sizeof(Contato), f);
+    if(qtd == 0)
+        return LER;
+
+    qtd = fread(pos_b, 1, sizeof(int), f);
     if(qtd == 0)
        return LER;
 

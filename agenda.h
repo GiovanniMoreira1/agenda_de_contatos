@@ -19,8 +19,8 @@ Value criar(Contato contatos[], int *pos);     // Função de Criar novo Contato
 Value deletar(Contato contatos[], int *pos);   // Função de Deletar um Contato
 Value atualizar(Contato contatos[], int *pos);   // Função de Atualizar um Contato
 Value listar(Contato contatos[], int *pos);    // Função de Listar os Contatos
-Value salvar(Contato contatos[], int *pos);    // Função de Salvar a lista de contatos no arquivo binário
-Value carregar(Contato contatos[], int *pos);  // Função de Carregar a lista de contatos do arquivo binário
+Value salvar(Contato pessoal[], int *pos_p, Contato business[], int *pos_b);    // Função de Salvar a lista de contatos no arquivo binário
+Value carregar(Contato pessoal[], int *pos_p, Contato business[], int *pos_b);  // Função de Carregar a lista de contatos do arquivo binário
 
 
 void clearBuffer(); // Função de Limpeza de Buffer
