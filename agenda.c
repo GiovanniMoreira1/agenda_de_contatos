@@ -28,6 +28,7 @@ Value criar(Contato contatos[], int *pos){
         if(strlen(num) > 12 || strlen(num) < 10){ // Verifica se o tamanho do número é válido
             numCorrect = 0;
         }
+
         if(numCorrect){
             for (int i = 0; num[i] != '\0'; i++) { // Verifica se não há nenhum char não numérico no número informado;
                 if (!isdigit(num[i]) && num[i] != '\0') {
@@ -35,18 +36,37 @@ Value criar(Contato contatos[], int *pos){
                     break;
                 }
             }
-        }
 
+            if(!numberValidation(contatos, *pos, num)){
+                printf("| > Telefone Já em uso, tente novamente...\n");
+                numCorrect = 0;
+                num[0] = '\0';
+            }
+        }
         else{
             printf("| > Telefone Inválido, tente novamente...\n");
             num[0] = '\0';
         }
+
+
+
     }while(!numCorrect);
     strcpy(contatos[*pos].telefone, num);
     //printf("| > Número: %s\n", contatos[*pos].telefone);
 
-    printf("| > Email do Contato: ");
-    fgets(contatos[*pos].email, T_EMAIL, stdin);
+    int emailCorrect;
+    do {
+        emailCorrect = 1;
+        printf("| > Email do Contato: ");
+        fgets(contatos[*pos].email, T_EMAIL, stdin);
+        contatos[*pos].email[strcspn(contatos[*pos].email, "\n")] = '\0';
+
+        if (!emailValidation(contatos[*pos].email)) {
+            printf("| > Email Inválido, tente novamente...\n");
+            emailCorrect = 0;
+        }
+    } while (!emailCorrect);
+
     contatos[*pos].email[strcspn(contatos[*pos].email, "\n")] = '\0';
 
     *pos = *pos + 1;
@@ -294,6 +314,21 @@ void tratarRes(Value err){
         printf("\033[31m| ERRO - Erro de Sistema Desconhecido.\n");
     }
     
+}
+
+// -------------------------------------------------------------------------- |
+// Funções de Validações:
+int numberValidation(Contato contatos[], int pos, const char num[T_TELEFONE]) {
+    for (int i = 0; i < pos; i++) {
+        if (strcmp(num, contatos[i].telefone) == 0) {
+            return 0; // Número já em uso
+        }
+    }
+    return 1; 
+}
+
+int emailValidation(const char email[T_EMAIL]){
+    return strchr(email, '@') != NULL;
 }
 
 // -------------------------------------------------------------------------- |
