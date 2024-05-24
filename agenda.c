@@ -328,7 +328,16 @@ int numberValidation(Contato contatos[], int pos, const char num[T_TELEFONE]) {
 }
 
 int emailValidation(const char email[T_EMAIL]){
-    return strchr(email, '@') != NULL;
+    int isValid;
+    if (strchr(email, '@') != NULL){
+        isValid = 1;
+        return strchr(email, '.') != NULL;
+
+    }
+    else{
+        return 0;
+    }
+    
 }
 
 // -------------------------------------------------------------------------- |
